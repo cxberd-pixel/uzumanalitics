@@ -35,7 +35,7 @@ class UzumApi
 
         curl_close($ch);
 
-        return json_decode($response, true);
+        return $response;
     }
 
     public function getOrders($from, $to)
