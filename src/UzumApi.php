@@ -4,6 +4,8 @@ class UzumApi
 {
     private $token;
     private $baseUrl;
+	
+
 
     public function __construct()
     {
@@ -43,4 +45,6 @@ class UzumApi
         'dateTo' => $to . 'T23:59:59'
     ]);
 }
+var_dump($this->token);
+exit;
 }
