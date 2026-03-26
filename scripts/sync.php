@@ -13,7 +13,7 @@ try {
     $orders = $api->getOrders($from, $to);
 
     echo "=== ORDERS ===\n";
-    print_r($orders);
+ echo json_encode($orders, JSON_PRETTY_PRINT);
 
 } catch (Exception $e) {
     echo "ERROR: " . $e->getMessage();
