@@ -40,7 +40,7 @@ class UzumApi
 
     public function getOrders($from, $to)
     {
-        return $this->request('/v1/orders', [
+        return $this->request('/orders', [
             'dateFrom' => $from,
             'dateTo' => $to
         ]);
