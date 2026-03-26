@@ -13,36 +13,34 @@ class UzumApi
     }
 
     private function request($endpoint, $params = [])
-    {
-        $url = $this->baseUrl . $endpoint . '?' . http_build_query($params);
+{
+    $url = $this->baseUrl . $endpoint . '?' . http_build_query($params);
 
-        $ch = curl_init();
+    $ch = curl_init($url);
 
-        curl_setopt_array($ch, [
-            CURLOPT_URL => $url,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_HTTPHEADER => [
-                'Authorization: Bearer ' . $this->token,
-                'Accept: application/json'
-            ],
-        ]);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        'X-API-Key: ' . $this->token,
+        'Content-Type: application/json',
+        'Accept: application/json'
+    ]);
 
-        $response = curl_exec($ch);
+    $response = curl_exec($ch);
 
-        if (curl_errno($ch)) {
-            throw new Exception(curl_error($ch));
-        }
-
-        curl_close($ch);
-
-        return $response;
+    if (curl_errno($ch)) {
+        throw new Exception(curl_error($ch));
     }
 
-    public function getOrders($from, $to)
-    {
-        return $this->request('/orders', [
-            'dateFrom' => $from,
-            'dateTo' => $to
-        ]);
-    }
+    curl_close($ch);
+
+    return json_decode($response, true);
+}
+
+   public function getOrders($from, $to)
+{
+    return $this->request('/v1/orders', [
+        'dateFrom' => $from . 'T00:00:00',
+        'dateTo' => $to . 'T23:59:59'
+    ]);
+}
 }
