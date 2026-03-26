@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../src/UzumApi.php';
+require_once __DIR__ . '/src/UzumApi.php';
 
 $api = new UzumApi();
 
@@ -15,7 +15,7 @@ $syncMessage = null;
 // 🔄 Обновление данных
 if (isset($_POST['sync'])) {
     $output = [];
-    exec('php ' . __DIR__ . '/../scripts/sync.php 2>&1', $output);
+    exec('php ' . __DIR__ . '/scripts/sync.php 2>&1', $output);
     $syncMessage = implode("\n", $output);
 }
 
